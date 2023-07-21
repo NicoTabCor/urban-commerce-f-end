@@ -1,0 +1,47 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+html,
+body {
+	height: 100%;
+}
+
+html {
+	font-size: 62.5%;
+	box-sizing: border-box;
+	line-height: unset;
+}
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+body {
+	margin: 5rem 0 0 0;
+	background-color: white;
+	align-items: center;
+	overflow: auto;
+}
+
+[class$='__contenedor'] {
+	margin: 0 auto;
+	width: 95%;
+	max-width: 120rem;
+}
+
+.app {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+
+	&--loading {
+		opacity: .8;
+	}
+}
+
+a {
+	text-decoration: none;
+}
+
+p {
+	margin: 0;
+}

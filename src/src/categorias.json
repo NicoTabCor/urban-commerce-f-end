@@ -1,0 +1,51 @@
+{
+  "categorias": {
+    "mujer": {
+
+      "remeras": {
+        "nike": {
+          "precio": 40,
+          "talle": "L"
+        },
+        "adidas": {
+          "precio": 30,
+          "talle": "S"
+        }
+      },
+      "pantalon": {
+        "lacoste": {
+          "precio": 400,
+          "talle": 40
+        },
+        "tabertini": {
+          "precio": 300,
+          "talle": 44
+        }
+      }
+
+    },
+
+    "hombre": {
+      "zapatillas": {
+        "reebok": {
+          "precio": 35,
+          "talle": "XL"
+        },
+        "salomon": {
+          "precio": 10,
+          "talle": "XS"
+        }
+      },
+      "jean": {
+        "lacoste": {
+          "precio": 450,
+          "talle": 42
+        },
+        "tabertini": {
+          "precio": 200,
+          "talle": 42
+        }
+      }
+    }
+  }
+}

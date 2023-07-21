@@ -1,0 +1,22 @@
+@use 'base/variables' as v;
+
+h1, h2, h3 {
+  font-family: v.$fuente_principal;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 6rem;
+}
+
+h2 {
+	font-size: 4rem;
+}
+
+h3 {
+  font-size: 3.5rem
+}
+
+p, label, input, a {
+  font-family: v.$fuente_secundaria;
+}

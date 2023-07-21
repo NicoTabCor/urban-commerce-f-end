@@ -1,0 +1,169 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.formulario {
+	background-color: v.$gris;
+	border-radius: 0.3rem;
+	box-shadow: 0px 1px 4px 0px gray;
+	padding: 3rem;
+	margin: 0 auto;
+	width: 95%;
+	max-width: 60rem;
+
+	&__titulo {
+		text-align: center;
+		margin: 0;
+	}
+
+	&__contenedor {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		padding: 4rem 4rem 0 0;
+	}
+
+	&__campo {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__base {
+		display: flex;
+		gap: 1rem;
+		align-items: center;
+	}
+
+	&__label {
+		font-size: 1.5rem;
+		text-align: right;
+		font-style: italic;
+		flex: 0 0 calc(30%);
+	}
+
+	&__input {
+		width: 100%;
+		font-size: 1.5rem;
+		padding: 0.4rem 0.7rem;
+		border: none;
+		border-radius: 0.4rem;
+		background-color: lighten(v.$grisOscuro, 60%);
+	}
+
+	&__select {
+		font-size: 1.5rem;
+		border-radius: 1rem;
+		font-family: v.$fuente_secundaria;
+	}
+
+	&__error {
+		align-self: flex-end;
+		font-size: 1.4rem;
+		color: v.$rojo;
+		font-family: v.$fuente_secundaria;
+		font-style: italic;
+	}
+
+	&__boton {
+		@include m.boton(v.$blanco, lighten(v.$azul, 15%));
+		margin-top: 1.4rem;
+		align-self: flex-end;
+		font-family: v.$fuente_secundaria;
+
+		&--loading {
+			position: relative;
+			color: transparent;
+
+			&::after {
+				content: '';
+				width: 2rem;
+				height: 2rem;
+				background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%23000' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M20 4v5h-.582m0 0a8.001 8.001 0 00-15.356 2m15.356-2H15M4 20v-5h.581m0 0a8.003 8.003 0 0015.357-2M4.581 15H9' /%3E%3C/svg%3E");
+				animation: spin 1s infinite linear;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				margin-top: -1rem;
+				margin-left: -1rem;
+			}
+		}
+	}
+
+	&__enlaces {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		margin-top: 2rem;
+		gap: 2rem;
+		align-items: center;
+
+		@include m.telefono {
+			flex-direction: row;
+		}
+	}
+
+	&__enlace {
+		font-size: 1.4rem;
+		text-decoration: none;
+		color: lighten(v.$azul, 15%);
+		transition: color 0.2s ease;
+
+		&:hover {
+			color: v.$azul;
+		}
+	}
+
+	&__textarea {
+		font-size: 2rem;
+		font-family: v.$fuente_secundaria;
+	}
+
+	&__sin-elegir {
+		font-size: 1.3rem;
+		text-transform: uppercase;
+		display: flex;
+		align-self: flex-end;
+	}
+
+	&__imagen {
+	}
+
+	&__imagen-texto {
+	}
+
+	&__reenvio {
+		margin: 0 auto;
+		text-align: center;
+	}
+}
+
+.imagenes-actuales {
+
+	max-width: 100%;
+
+	&__titulo {
+		font-size: 1.7rem;
+		font-family: v.$fuente_secundaria;
+		text-decoration: underline;
+		text-align: center;
+	}
+
+	&__contenedor {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+
+	&__imagen {
+		max-width: 10rem;
+		
+	}
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}

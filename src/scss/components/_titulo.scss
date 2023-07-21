@@ -1,0 +1,44 @@
+@use 'base/variables' as v;
+
+/*--- TITULO ---*/
+.app__marca {
+	color: v.$negro;
+	margin-bottom: 5rem;
+	margin-top: 5rem;
+	position: relative;
+	font-weight: 900;
+	letter-spacing: 0.8rem;
+	width: 100%;
+	text-align: center;
+	text-shadow: 0 0 1px black;
+
+	&::after {
+		content: attr(data-content);
+		position: absolute;
+		display: block;
+		font-size: inherit;
+		font-weight: inherit;
+		width: inherit;
+		height: 100%;
+		bottom: -57%;
+		transform: scaleY(-1);
+		overflow: hidden;
+	}
+
+	&::before {
+		content: '';
+		display: block;
+		width: inherit;
+		height: 68%;
+		position: absolute;
+		bottom: -45%;
+		background: linear-gradient(to bottom, rgba(250, 250, 250, 0.596), white);
+		z-index: 1;
+	}
+}
+
+/*--- Subtitulo ---*/
+.app__mensaje {
+	text-align: center;
+	font-family: v.$fuente_principal;
+}

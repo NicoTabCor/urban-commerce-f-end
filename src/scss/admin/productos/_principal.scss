@@ -1,0 +1,117 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.registros {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  
+  &__boton-crear {
+    @include m.boton(v.$blanco, lighten(v.$azul, 15%));
+    align-self: flex-end;
+  }
+
+  &__vista {
+    display: flex;
+    font-size: 1.8rem;
+    justify-content: space-around;
+  }
+
+  &__filtro-texto,
+  &__select {
+    text-transform: uppercase;
+    font-family: v.$fuente_secundaria;
+  }
+}
+
+.tabla { 
+  margin: 3rem auto 0 auto;
+  text-align: center;
+  background-color: gray;
+  font-size: 1.7rem;
+
+  &__head {
+    background-color: white;
+  }
+
+  &__fila {
+    background-color: white;
+  }
+
+  &__celda {
+    font-family: v.$fuente_secundaria;
+  }
+
+  &__imagenes {
+    width: 15rem;
+    height: 10rem;
+    overflow: hidden;
+    margin: 0 auto;
+    position: relative;
+
+    &::after {
+      content: ">";
+      position: absolute;
+      top: 50%;
+      right: 0;
+    }
+  }
+
+  &__imagen {
+    width: 10rem;
+  }
+
+  &__acciones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+  }
+
+  &__accion {
+    all: unset;
+    font-family: v.$fuente_secundaria;
+    font-size: 1.4rem;
+    padding: .5rem 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: filter .3s ease;
+
+    &:hover {
+      filter: brightness(50%);
+    }
+
+    &--editar {
+      color: v.$verdeFuerte;
+    }
+
+    &--eliminar {
+      color: v.$rojo;
+    }
+  }
+
+  &__h-columna {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+  }
+
+  &__h-texto {
+    
+  }
+
+  &__boton {
+    all: unset;
+    cursor: pointer;
+
+    &--vuelta {
+      rotate: 180deg;
+    }
+
+    &--activo {
+      color: v.$rojo;
+    }
+  }
+}
