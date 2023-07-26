@@ -15,7 +15,6 @@
 
 body {
 	margin: 0 !important;
-  overflow: hidden!important;
 }
 
 .dashboard {
@@ -76,12 +75,13 @@ body {
 	}
 
 	&__grid {
+		margin-top: 7vh;
 		display: flex;
 		flex-basis: calc(100%) !important;
 		flex-direction: column;
 		overflow-y: auto;
-    max-height: 91vh;
-    min-height: 91vh;
+    max-height: 93vh;
+    min-height: 93vh;
     
 		@include m.tablet {
 			flex-direction: row;

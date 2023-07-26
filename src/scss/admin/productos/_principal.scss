@@ -4,8 +4,6 @@
 .registros {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
   
   &__boton-crear {
     @include m.boton(v.$blanco, lighten(v.$azul, 15%));
@@ -41,6 +39,7 @@
 
   &__celda {
     font-family: v.$fuente_secundaria;
+    
   }
 
   &__imagenes {

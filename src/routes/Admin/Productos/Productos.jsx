@@ -12,11 +12,10 @@ export async function loader() {
 
 	try {
 		const peticion = await fetch(url, {
+			credentials: 'include',
 			headers: {
 				'X-XSRF-TOKEN': decodeURIComponent(tokensData['XSRF-TOKEN']),
-				Authorization: `Bearer ${decodeURIComponent(tokensData['accessT'])}`,
 			},
-			credentials: 'include',
 		});
 
 		const resultado = await peticion.json();
@@ -185,9 +184,7 @@ export default function Productos() {
 								<button
 									data-id="nombre"
 									className="tabla__boton"
-									onClick={() => handleOrdenar('nombre')}
 								>
-									▲
 								</button>
 							</div>
 						</th>
@@ -318,8 +315,8 @@ export default function Productos() {
 								<td className="tabla__celda">{producto.precio}$</td>
 								<td className="tabla__celda">{producto.descuento}%</td>
 								<td className="tabla__celda">
-									{producto.precio -
-										(producto.precio * producto.descuento) / 100}
+									{(producto.precio -
+										(producto.precio * producto.descuento) / 100).toFixed(2, 10)}
 									$
 								</td>
 								<td className="tabla__celda">{producto.marcas_nombre}</td>

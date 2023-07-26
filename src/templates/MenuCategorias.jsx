@@ -62,9 +62,7 @@ export default function MenuCategorias({ edades, generos, categorias }) {
 
 			<div className="menu-cat__categorias">
 				{categorias.map((categoria) => {
-					if (
-						categoria.generos_id === menuState.generoId
-					) {
+					if (categoria.generos_id === menuState.generoId) {
 						return (
 							<NavLink className="menu-cat__link" to="#" key={categoria.id}>
 								{categoria.nombre}
@@ -72,31 +70,6 @@ export default function MenuCategorias({ edades, generos, categorias }) {
 						);
 					}
 				})}
-				{/* <a href="#">Pijamas</a>
-				<a href="#">Parka</a>
-				<a href="#">Zapatos</a>
-				<a href="#">Vestidos</a>
-				<a href="#">Remeras</a>
-				<a href="#">Pijamas</a>
-				<a href="#">Parka</a>
-				<a href="#">Zapatos</a>
-				<a href="#">Vestidos</a>
-				<a href="#">Remeras</a>
-				<a href="#">Pijamas</a>
-				<a href="#">Parka</a>
-				<a href="#">Zapatos</a>
-				<a href="#">Vestidos</a>
-				<a href="#">Remeras</a>
-				<a href="#">Pijamas</a>
-				<a href="#">Parka</a>
-				<a href="#">Zapatos</a>
-				<a href="#">Vestidos</a>
-				<a href="#">Remeras</a>
-				<a href="#">Pijamas</a>
-				<a href="#">Parka</a>
-				<a href="#">Zapatos</a>
-				<a href="#">Vestidos</a>
-				<a href="#">Remeras</a> */}
 			</div>
 		</div>
 	);

@@ -7,11 +7,18 @@ import { useState } from 'react';
 
 export default function Header({
 	stateMenuCat,
+	setStateMenuCat,
 	categorias,
 	edades,
 	generos,
 	auth,
 }) {
+	const [loginState, setLoginState] = useState(false);
+
+	function mostrarCatClick() {
+		setStateMenuCat(!stateMenuCat);
+		flecha.classList.toggle('barra__categorias-flecha--girar');
+	}
 
 	return (
 		<header className="barra">
@@ -49,7 +56,8 @@ export default function Header({
 						/>
 					</div>
 
-					<MenuLogin auth={auth} />
+					<MenuLogin auth={auth} loginState={loginState} />
+					
 				</div>
 			</div>
 

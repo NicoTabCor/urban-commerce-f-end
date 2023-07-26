@@ -9,6 +9,8 @@
 	/*--- Footer Superior ---*/
 	&__contenedor {
 		display: flex;
+		flex-wrap: wrap;
+		gap: .8rem;
 		justify-content: space-evenly;
 		align-items: center;
 		text-align: center;

@@ -30,11 +30,10 @@ export async function loader({ params }) {
 	try {
 		const requests = urls.map(async (url) => {
 			const firstFetch = await fetch(url, {
+				credentials: 'include',
 				headers: {
 					'X-XSRF-TOKEN': decodeURIComponent(tokensData['XSRF-TOKEN']),
-					Authorization: `Bearer ${decodeURIComponent(tokensData['accessT'])}`,
 				},
-				credentials: 'include',
 			});
 
 			const result = await firstFetch.json();

@@ -1,4 +1,4 @@
-import { Form, redirect, useActionData, useNavigation } from 'react-router-dom';
+import { Form, NavLink, redirect, useActionData, useNavigation } from 'react-router-dom';
 
 export async function action({ request }) {
 	console.log('registro');
@@ -155,12 +155,12 @@ export default function Registro() {
 			</Form>
 
 			<div className="formulario__enlaces">
-				<a href="#" className="formulario__enlace">
+				<NavLink to="/user/olvide" className="formulario__enlace">
 					¿Has olvidado tu contraseña?
-				</a>
-				<a href="/user/login" className="formulario__enlace">
+				</NavLink>
+				<NavLink to="/user/login" className="formulario__enlace">
 					¿Ya tienes una cuenta? Inicia Sesión
-				</a>
+				</NavLink>
 			</div>
 		</div>
 	);

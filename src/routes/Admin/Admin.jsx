@@ -2,6 +2,7 @@ import { Outlet, redirect, useNavigation } from 'react-router-dom';
 import HeaderAdmin from '../../templates/HeaderAdmin';
 import Sidebar from './Sidebar';
 import tokens from '../../src/js/helpers';
+import Header from '../../templates/Header';
 
 export async function loader() {
 	const url = 'http://localhost:8000/api/admin';
@@ -55,7 +56,7 @@ export default function Admin() {
 	
 	return (
 		<div className={cargado} >
-			<HeaderAdmin />
+			<Header />
 
 			<div className="dashboard__grid">
 				<Sidebar />

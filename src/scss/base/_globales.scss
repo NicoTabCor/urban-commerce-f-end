@@ -4,6 +4,17 @@ body {
 	height: 100%;
 }
 
+::-webkit-scrollbar {
+  width: 12px; /* Ancho de la barra de desplazamiento */
+	height: 12px;
+}
+
+/* Estilo de la barra de desplazamiento en estado normal */
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color de fondo de la barra de desplazamiento */
+  border-radius: 6px; /* Borde redondeado de la barra de desplazamiento */
+}
+
 html {
 	font-size: 62.5%;
 	box-sizing: border-box;
@@ -21,6 +32,7 @@ body {
 	align-items: center;
 	overflow: auto;
 }
+
 
 [class$='__contenedor'] {
 	margin: 0 auto;

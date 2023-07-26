@@ -1,10 +1,19 @@
-import { Form, redirect, useActionData, useNavigation } from 'react-router-dom';
+import {
+	Form,
+	NavLink,
+	redirect,
+	useActionData,
+	useNavigation,
+	useSubmit,
+} from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
-import { useEffect, useRef, useState } from 'react';
 import tokens from '../../src/js/helpers';
+import { useEffect } from 'react';
+
+export async function loader() {}
 
 export async function action({ request }) {
-	// -- CSRF -- //
+	// -- CSRF Request -- //
 	const urlToken = 'http://localhost:8000/sanctum/csrf-cookie';
 
 	try {
@@ -17,31 +26,32 @@ export async function action({ request }) {
 
 	// -- Tokens -- //
 	const tokenCookie = tokens();
-	// -- Form Data -- //
 	const datos = await request.formData();
-	// -- GOOGLE O NORMAL -- //
 
+	// -- Login with Credentials or with Google  -- //
 	if (datos.get('token') === null || datos.get('token') === '') {
-		// -- LOGIN -- //
+		// -- With Credentials -- //
 		const url = 'http://localhost:8000/api/login';
+
 		try {
 			const response = await fetch(url, {
 				method: 'post',
 				body: datos,
 				credentials: 'include',
 				headers: {
+					Accept: 'application/json',
 					'X-XSRF-TOKEN': decodeURIComponent(tokenCookie['XSRF-TOKEN']),
 				},
 			});
 
 			// -- EXITO O ERROR -- //
 			const resultado = await response.json();
-
-			if (resultado.resultado) {
-				// -- Redireccion a Admin -- //
-				console.log(resultado);
-				return true;
+			console.log(resultado);
+			if (resultado) {
+				// -- Redirect to Admin or User Section -- //
+				return resultado;
 				return redirect('http://localhost:5173/admin/dashboard');
+				return redirect('http://localhost:5173/user/profile');
 			} else {
 				console.log(resultado);
 				return resultado;
@@ -81,25 +91,37 @@ export async function action({ request }) {
 }
 
 export default function Login() {
+
 	const data = useActionData();
+	const submit = useSubmit();
 	const navigation = useNavigation();
 
-	const [tokenState, setTokenState] = useState('');
+	const loginGoogle = async (token) => {
+		const form = document.querySelector('#form-google');
+		const oculto = form.querySelector('.oculto');
+		oculto.value = token.credential;
 
-	const firstTime = useRef(true);
+		submit(form, {
+			method: 'post',
+			action: '/user/login',
+		});
+	};
 
 	useEffect(() => {
-		if (firstTime.current) {
-			firstTime.current = false;
-			return;
-		}
-		const boton = document.querySelector('.google-login');
-		boton.click();
-	}, [tokenState]);
+		google.accounts.id.initialize({
+			client_id: "258932292798-6pc858uab9si4varr8e7e6rbjpe3t29s.apps.googleusercontent.com",
+			callback: loginGoogle
+		});
 
-	async function loginGoogle(token) {
-		setTokenState(token.credential);
-	}
+		google.accounts.id.renderButton(
+			document.getElementById("signInDiv"),
+			{
+				theme: "outline",
+				size: "large",
+				width: "200px"
+			}
+		)
+	}, [])
 
 	return (
 		<div className="formulario">
@@ -123,7 +145,13 @@ export default function Login() {
 							placeholder="Tu Email"
 						/>
 					</div>
-					{data ? <div className="formulario__error">{data.email}</div> : ''}
+					{data && data.errores.email
+						? data.errores.email.map((error) => (
+								<div key={error} className="formulario__error">
+									{error}
+								</div>
+						  ))
+						: ''}
 				</div>
 
 				<div className="formulario__campo">
@@ -139,7 +167,13 @@ export default function Login() {
 							placeholder="Tu Contraseña"
 						/>
 					</div>
-					{data ? <div className="formulario__error">{data.password}</div> : ''}
+					{data && data.errores.password
+						? data.errores.password.map((error) => (
+								<div key={error} className="formulario__error">
+									{error}
+								</div>
+						  ))
+						: ''}
 				</div>
 
 				<button
@@ -154,30 +188,31 @@ export default function Login() {
 				</button>
 			</Form>
 
-			<Form action="/user/login" method="post">
-				<GoogleLogin
+			<Form
+				id="form-google"
+				className="formulario__google"
+				action="/user/login"
+				method="post"
+			>
+				<div id="signInDiv"></div>
+				{/* <GoogleLogin
 					onSuccess={loginGoogle}
 					onError={() => {
 						console.log('Login Failed');
 					}}
-				/>
+				/> */}
+				
 
-				<input type="hidden" name="token" value={tokenState} />
-
-				<input
-					className="google-login"
-					type="submit"
-					style={{ display: 'none' }}
-				/>
+				<input className="oculto" type="hidden" name="token" />
 			</Form>
 
 			<div className="formulario__enlaces">
-				<a href="#" className="formulario__enlace">
+				<NavLink to="/user/olvide" className="formulario__enlace">
 					¿Has olvidado tu contraseña?
-				</a>
-				<a href="/user/registro" className="formulario__enlace">
+				</NavLink>
+				<NavLink to="/user/registro" className="formulario__enlace">
 					¿No tienes una cuenta? Crea una
-				</a>
+				</NavLink>
 			</div>
 		</div>
 	);

@@ -1,17 +1,27 @@
+// -- React -- //
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import './scss/app.scss';
+
+// -- React Router -- //
+import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+
+// -- Auth Public -- //
 import User, { loader as headerLoader } from './routes/Publico/User.jsx';
 import Login, { action as loginAction } from './routes/Publico/Login.jsx';
+import { action as logoutAction } from './templates/MenuLogin';
+import Olvide from './routes/Publico/Olvide';
 import Registro, {
 	action as registroAction,
 } from './routes/Publico/Registro.jsx';
 
+// -- ADMIN -- //
 import Admin, { loader as adminLoader } from './routes/Admin/Admin';
 import Dashboard from './routes/Admin/Dashboard';
+
+// -- Product -- //
 import Productos, {
 	loader as productosLoader,
 	action as productosAction,
@@ -25,13 +35,7 @@ import EditarProducto, {
 	action as editarProductoAction,
 } from './routes/Admin/Productos/EditarProducto';
 
-import Ventas from './routes/Admin/Ventas';
-import Aspecto from './routes/Admin/Aspecto';
-import Pedidos from './routes/Admin/Pedidos';
-import Colores from './routes/Admin/Colores';
-import Edades from './routes/Admin/Edades';
-import Generos from './routes/Admin/Generos';
-
+// -- Category -- //
 import Categorias, {
 	loader as categoriasLoader,
 	action as categoriasAction,
@@ -46,6 +50,16 @@ import EditarCategoria, {
 	loader as editarCategoriaLoader,
 	action as editarCategoriaAction,
 } from './routes/Admin/Categorias/EditarCategoria';
+
+// -- Other Admin Sections -- //
+import Ventas from './routes/Admin/Ventas';
+import Aspecto from './routes/Admin/Aspecto';
+import Pedidos from './routes/Admin/Pedidos';
+import Colores from './routes/Admin/Colores';
+import Edades from './routes/Admin/Edades';
+import Generos from './routes/Admin/Generos';
+
+// -- Verify -- //
 import Verificar, {
 	action as verificarAction,
 } from './routes/Publico/Verificar';
@@ -70,6 +84,7 @@ const router = createBrowserRouter([
 						path: '/admin/dashboard',
 						element: <Dashboard />,
 					},
+					// -- Product CRUD -- //
 					{
 						path: '/admin/productos',
 						element: <Productos />,
@@ -88,23 +103,27 @@ const router = createBrowserRouter([
 						action: editarProductoAction,
 						loader: editarProductoLoader,
 					},
+					// -- Sales CRUD -- //
 					{
 						path: '/admin/ventas',
 						element: <Ventas />,
 					},
+					// -- Aspect management -- //
 					{
 						path: '/admin/aspecto',
 						element: <Aspecto />,
 					},
+					// -- Costumer Requests -- //
 					{
 						path: '/admin/pedidos',
 						element: <Pedidos />,
 					},
+					// -- Colors -- //
 					{
 						path: '/admin/colores',
 						element: <Colores />,
 					},
-					// -- CATEGORIAS -- //
+					// -- Category CRUD -- //
 					{
 						path: '/admin/categorias',
 						element: <Categorias />,
@@ -123,10 +142,12 @@ const router = createBrowserRouter([
 						loader: editarCategoriaLoader,
 						action: editarCategoriaAction,
 					},
+					// -- Age CRUD -- //
 					{
 						path: '/admin/edades',
 						element: <Edades />,
 					},
+					// -- Gender CRUD -- //
 					{
 						path: '/admin/generos',
 						element: <Generos />,
@@ -137,6 +158,7 @@ const router = createBrowserRouter([
 			{
 				path: '/user',
 				element: <User />,
+				action: logoutAction,
 				loader: headerLoader,
 				children: [
 					{ index: true, element: <Login /> },
@@ -148,6 +170,12 @@ const router = createBrowserRouter([
 					{
 						path: '/user/registro',
 						element: <Registro />,
+						action: registroAction,
+					},
+					{
+						path: '/user/olvide',
+						
+						element: <Olvide />,
 						action: registroAction,
 					},
 					{

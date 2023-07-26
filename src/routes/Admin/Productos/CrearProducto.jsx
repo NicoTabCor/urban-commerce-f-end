@@ -59,13 +59,12 @@ export async function action({ request }) {
 
 	try {
 		const envio = await fetch(url, {
-			headers: {
-				'X-XSRF-TOKEN': decodeURIComponent(tokensData['XSRF-TOKEN']),
-				Authorization: `Bearer ${tokensData['accessT']}`,
-			},
 			credentials: 'include',
 			body: datos,
-			method: 'POST',
+			method: 'post',
+			headers: {
+				'X-XSRF-TOKEN': decodeURIComponent(tokensData['XSRF-TOKEN']),
+			},
 		});
 
 		const resultado = await envio.json();
@@ -74,10 +73,9 @@ export async function action({ request }) {
 			const MySwal = withReactContent(Swal);
 
 			await MySwal.fire({
-				title: <p>Exito!</p>,
+				title: 'Registro Creado Correctamente',
 				position: 'center',
 				icon: 'success',
-				title: 'Registro Creado Correctamente',
 				showConfirmButton: true,
 			});
 

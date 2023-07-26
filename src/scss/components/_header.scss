@@ -7,6 +7,7 @@
 	right: 0;
 	left: 0;
 	z-index: 5;
+	height: 5.4rem;
 
 	&__base {
 		display: flex;
@@ -33,8 +34,10 @@
 		height: 100%;
 		padding: 1.7rem;
 
-		&:hover .barra__categorias-flecha {
-			rotate: 180deg;
+		.barra__categorias-flecha {
+			&--girar {
+				rotate: 180deg;
+			}
 		}
 	}
 
@@ -47,6 +50,10 @@
 		transform-origin: 50% 60%;
 		transition: rotate 0.3s ease;
 		transform: translateY(-10%);
+
+		&--girar {
+			rotate: 180deg;
+		}
 	}
 
 	/*--- Login ---*/
@@ -71,15 +78,20 @@
 	color: black;
 	height: 40vh;
 	font-size: 1.2rem;
-	padding: 2rem 2rem;
+	padding: 2rem 0;
 	box-shadow: 0px 1px 1px 0px;
+
+	&__edad,
+	&__genero,
+	&__categorias {
+		padding: 1rem 2rem;
+	}
 
 	&__edad,
 	&__genero {
 		display: flex;
 		flex-direction: column;
-		gap: 3rem;
-		padding: 2rem;
+		gap: 2rem;
 		align-items: center;
 	}
 
@@ -93,8 +105,7 @@
 		display: flex;
 		flex-direction: column;
 		flex-wrap: wrap;
-		gap: 4rem;
-		padding: 2rem;
+		gap: 2rem;
 		overflow: auto;
 	}
 
@@ -113,7 +124,7 @@
 	position: absolute;
 	width: 15rem;
 	top: 145%;
-	right: -57%;
+	right: 0;
 	z-index: 1;
 	filter: drop-shadow(1px 1px 2px black);
 
@@ -144,9 +155,26 @@
 
 	&__registro {
 		@include m.boton(v.$negro, v.$amarillo);
+		
 	}
 
 	&__login {
 		@include m.boton(v.$negro, v.$celeste);
 	}
+	
+	&__logout {
+		@include m.boton(v.$blanco, v.$rojo);
+	}
+
+	&__login,
+	&__logout {
+		font-family: v.$fuente_secundaria;
+	}
+
+	&__registro,
+	&__login {
+		color: v.$negro!important;
+	}
+
+	
 }

@@ -3,12 +3,14 @@ import { definirActionForm, definirLoaderForm } from '../../../src/js/helpers';
 import Lista from '../template/Lista';
 import { useActionData, useLoaderData } from 'react-router';
 
+// -- Executed before rendering -- //
 export async function loader() {
 	const url = 'http://localhost:8000/api/admin/categorias/datos-formulario';
 
 	return await definirLoaderForm(url);
 }
 
+// -- Executed on <Form> component submit -- //
 export async function action({ request }) {
 	const argsAction = {
 		urlPost: 'http://localhost:8000/api/admin/categorias/crear',
@@ -16,7 +18,7 @@ export async function action({ request }) {
 		request: request,
 		mensajeCorrecto: 'Categoria Creada Correctamente',
 	};
-
+	
 	return definirActionForm(argsAction);
 }
 
@@ -25,6 +27,7 @@ export default function CrearCategoria() {
   const errores = useActionData();
 
 	// -- STATES -- //
+	
 	const [stateCat, setStateCat] = useState({
 		talle_tipos: null,
 		edades: null,
@@ -93,8 +96,7 @@ export default function CrearCategoria() {
 		});
 	}
 
-	// -- ESTILOS SELECT -- //
-
+	// -- Styles of Select's component -- //
 	const dot = (color = 'transparent', nombre) => {
 		if (nombre === 'colores') {
 			return {

@@ -23,7 +23,7 @@ export async function loader() {
 			console.log(resquestJson.resultado);
 			return true;
 		} 
-		return redirect('http://localhost:5173/user/login');
+		// return redirect('http://localhost:5173/user/login');
 	} catch (error) {
 		console.log(error);
 		return redirect('http://localhost:5173/user/login');

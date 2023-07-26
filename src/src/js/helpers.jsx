@@ -2,6 +2,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { redirect } from 'react-router-dom';
 
+// -- Get tokens from cookies -- //
 export default function tokens() {
 	const tokenCookie = document.cookie.split(';').reduce((acc, cookie) => {
 		const [nombre, valor] = cookie.trim().split('=');
@@ -12,6 +13,7 @@ export default function tokens() {
 	return tokenCookie;
 }
 
+// -- Make request on <Form> component's submitting for make Post Fetch Request -- //
 export async function definirActionForm({
 	urlPost,
 	urlRedirect,
@@ -24,13 +26,12 @@ export async function definirActionForm({
 
 	try {
 		const envio = await fetch(url, {
+			credentials: 'include',
+			method: 'post',
+			body: datos,
 			headers: {
 				'X-XSRF-TOKEN': decodeURIComponent(tokensData['XSRF-TOKEN']),
-				Authorization: `Bearer ${tokensData['accessT']}`,
 			},
-			credentials: 'include',
-			body: datos,
-			method: 'POST',
 		});
 
 		const resultado = await envio.json();
@@ -179,3 +180,6 @@ export async function definirActionLista(url, urlRedireccion, request) {
 		return false;
 	}
 }
+
+
+
