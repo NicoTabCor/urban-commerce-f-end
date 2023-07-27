@@ -9,7 +9,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 // -- Auth Public -- //
-import User, { loader as headerLoader } from './routes/Publico/User.jsx';
+import { loader as headerLoader } from './templates/Header';
+import User from './routes/Publico/User.jsx';
 import Login, { action as loginAction } from './routes/Publico/Login.jsx';
 import { action as logoutAction } from './templates/MenuLogin';
 import Olvide from './routes/Publico/Olvide';

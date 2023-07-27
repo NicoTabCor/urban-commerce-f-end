@@ -44,7 +44,7 @@ export async function action({ request }) {
 				},
 			});
 
-			// -- EXITO O ERROR -- //
+			// -- Success or Error -- //
 			const resultado = await response.json();
 			console.log(resultado);
 			if (resultado) {
@@ -61,11 +61,10 @@ export async function action({ request }) {
 			return false;
 		}
 	} else {
-		// -- GOOGLE LOGIN -- //
+		// -- Google Login -- //
 		const url = 'http://localhost:8000/api/googlelogin';
-
 		try {
-			// -- CONSUMIR API -- //
+			// -- Api Consume -- //
 			const envioToken = await fetch(url, {
 				method: 'post',
 				body: datos,
@@ -76,11 +75,12 @@ export async function action({ request }) {
 			});
 
 			const respuestaJson = await envioToken.json();
+			
 			if (respuestaJson) {
 				const tokenAcceso = await respuestaJson.token;
 
 				document.cookie = `accessT=${tokenAcceso};expires=7;path=/`;
-
+				
 				return redirect('http://localhost:5173/admin/dashboard');
 			}
 		} catch (error) {

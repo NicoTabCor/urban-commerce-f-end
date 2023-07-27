@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 export default function MenuCategorias({ edades, generos, categorias }) {
+	
 	const [menuState, setMenuState] = useState({
 		edadId: 1,
 		generoId: 1,

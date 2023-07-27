@@ -1,24 +1,44 @@
+import { useState } from 'react';
 import logo from '../src/imagenes/urbanlogo.png';
+import { useLoaderData } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortDown, faUser } from '@fortawesome/free-solid-svg-icons';
 import MenuCategorias from './MenuCategorias';
 import MenuLogin from './MenuLogin';
-import { useState } from 'react';
+import tokens from '../src/js/helpers';
 
-export default function Header({
-	stateMenuCat,
-	setStateMenuCat,
-	categorias,
-	edades,
-	generos,
-	auth,
-}) {
-	const [loginState, setLoginState] = useState(false);
+export async function loader() {
+	const url = 'http://localhost:8000/api/datos-menu';
+	const urlTokens = tokens();
 
-	function mostrarCatClick() {
-		setStateMenuCat(!stateMenuCat);
-		flecha.classList.toggle('barra__categorias-flecha--girar');
+	try {
+		const peticion = await fetch(url, {
+			credentials: 'include',
+			headers: {
+				'X-XSRF-TOKEN': decodeURIComponent(urlTokens['XSRF-TOKEN']),
+			},
+		});
+		
+		const peticionJson = await peticion.json();
+		console.log(peticionJson);
+		return peticionJson;
+
+	} catch (error) {
+		console.log(error);
+		return error;
 	}
+}
+
+export default function Header({stateMenuCat}) {
+	
+	const data = useLoaderData();
+
+	const edades = data.datosEdades;
+	const generos = data.datosGeneros;
+	const categorias = data.datosCat;
+	const auth = data.auth;
+
+	const [loginState, setLoginState] = useState(false);
 
 	return (
 		<header className="barra">
@@ -39,7 +59,7 @@ export default function Header({
 
 				<div>Buscar</div>
 
-				<div>carrito</div>
+				<div>Carrito</div>
 
 				<div
 					className="barra__login"

@@ -840,7 +840,7 @@ export default function EditarProducto() {
 
 					<input
 						type="submit"
-						className="formulario__boton"
+						className="formulario__boton--admin"
 						value="Editar Producto"
 					/>
 				</Form>

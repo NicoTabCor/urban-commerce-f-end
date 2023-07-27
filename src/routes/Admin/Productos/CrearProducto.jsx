@@ -724,7 +724,7 @@ export default function CrearProducto() {
 					</div>
 					<input
 						type="submit"
-						className="formulario__boton"
+						className="formulario__boton formulario__boton--admin"
 						value="Crear Nuevo Producto"
 					/>
 				</Form>

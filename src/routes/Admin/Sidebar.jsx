@@ -4,7 +4,8 @@ import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 export default function Sidebar() {
 	function colapso(event) {
-		event.target.parentElement.classList.toggle('dashboard__sidebar--cerrado');
+		const colapsador = document.querySelector('.dashboard__sidebar')
+		colapsador.classList.toggle('dashboard__sidebar--cerrado');
 	}
 
 	const navigation = useNavigation();
@@ -93,6 +94,7 @@ export default function Sidebar() {
 					<span className="dashboard__menu-texto">Generos</span>
 				</NavLink>
 			</nav>
+
 			<div className="dashboard__colapsador" onClick={colapso}>
 				<FontAwesomeIcon className="dashboard__icono-colapso" icon={faArrowDown} />
 			</div>

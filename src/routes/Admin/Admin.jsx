@@ -1,33 +1,35 @@
 import { Outlet, redirect, useNavigation } from 'react-router-dom';
-import HeaderAdmin from '../../templates/HeaderAdmin';
 import Sidebar from './Sidebar';
 import tokens from '../../src/js/helpers';
 import Header from '../../templates/Header';
+import Footer from '../../templates/Footer';
+import { useState } from 'react';
 
 export async function loader() {
 	const url = 'http://localhost:8000/api/admin';
 
 	const tokensData = tokens();
-	try {
 
+	try {
 		const auth = await fetch(url, {
 			method: 'post',
 			credentials: 'include',
 			headers: {
-				'X-XSRF-TOKEN': decodeURIComponent(tokensData['XSRF-TOKEN']),
-				'Content-Type': 'application/json',
 				'Accept': 'application/json',
+				'Authorization': `Bearer ${tokensData['accessT']}`,
+				'X-XSRF-TOKEN': decodeURIComponent(tokensData['XSRF-TOKEN']),
 			},
 		});
 
 		const respuestaAuth = await auth.json();
-		console.log(respuestaAuth);
-
+		
 		if(respuestaAuth.message === 'Your email address is not verified.') {
+			return true;
 			return redirect('http://localhost:5173/user/mensaje-verificar');
 		}
 
 		if(!respuestaAuth.resultado) {
+			return true
 			return redirect('http://localhost:5173/user/login');
 		}
 
@@ -43,6 +45,30 @@ export default function Admin() {
 
 	const navigation = useNavigation();
 
+	const [stateMenuCat, setStateMenuCat] = useState(false);
+
+	// -- MOSTRAR MENU CATEGORIAS -- //
+	function mostrarCatOver(e) {
+
+		const flecha = document.querySelector('.barra__categorias-flecha');
+
+		const barra = e.target.closest('.barra');
+		const barraCat = e.target.closest('.barra__categorias');
+		const menuCat = e.target.closest('.menu-cat');
+		const existeMenuCat = document.querySelector('.menu-cat');
+
+		if (
+			barraCat || menuCat || (barra && existeMenuCat)
+		) {
+			setStateMenuCat(true);
+			flecha.classList.add('barra__categorias-flecha--girar');
+
+		} else {
+			setStateMenuCat(false);
+			flecha.classList.remove('barra__categorias-flecha--girar');
+		}
+	}
+
 	const loading = () => {
 		
 		if(navigation.state === 'submitting' || navigation.state === 'loading') { 
@@ -55,8 +81,8 @@ export default function Admin() {
 	const cargado = loading();
 	
 	return (
-		<div className={cargado} >
-			<Header />
+		<div className={cargado} onMouseOver={mostrarCatOver}>
+			<Header stateMenuCat={stateMenuCat} />
 
 			<div className="dashboard__grid">
 				<Sidebar />
@@ -65,6 +91,7 @@ export default function Admin() {
 					<Outlet></Outlet>
 				</main>
 			</div>
+
 		</div>
 	);
 }

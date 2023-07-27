@@ -15,21 +15,16 @@
 	width: 95%;
 	max-width: 60rem;
 
-
-	&__google {
-
-	}
-
 	&__titulo {
 		text-align: center;
-		margin: 0;
+		margin-top: 2rem;
 	}
 
 	&__contenedor {
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;
-		margin-bottom: 2rem;
+		margin: 2rem;
 	}
 
 	&__campo {
@@ -75,9 +70,11 @@
 
 	&__boton {
 		@include m.boton(v.$blanco, lighten(v.$azul, 15%));
-		margin-top: 1.4rem;
-		align-self: flex-end;
 		font-family: v.$fuente_secundaria;
+		
+		&--admin {
+		  align-self: flex-end;
+		}
 
 		&--loading {
 			position: relative;
@@ -141,8 +138,10 @@
 	}
 
 	&__reenvio {
-		margin: 0 auto;
-		text-align: center;
+		display: flex;
+		gap: 2rem;
+		align-items: center;
+		justify-content: center;
 	}
 }
 
@@ -155,6 +154,7 @@
 		font-family: v.$fuente_secundaria;
 		text-decoration: underline;
 		text-align: center;
+		
 	}
 
 	&__contenedor {
